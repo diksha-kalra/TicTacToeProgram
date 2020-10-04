@@ -33,7 +33,12 @@ public class TicTacToe {
 
 	private int getUserMove(char[] b) {
 		int location = 0;
+		boolean isFull = true;
 		while (true) {
+			if (isFull == isBoardFull(b)) {
+				System.out.println("Board full its a tie ");
+				break;
+			}
 			System.out.println("User enter the location between 1 to 9");
 			location = sc.nextInt();
 			if (b[location] != ' ') {
@@ -48,12 +53,17 @@ public class TicTacToe {
 
 	private int getComputerMove(char[] b, char computerChoice, char userChoice) {
 		int location = 0;
+		boolean isFull = true;
 		while (true) {
+			if (isFull == isBoardFull(b)) {
+				System.out.println("Board full its a tie ");
+				break;
+			}
 			location = (int) Math.floor(Math.random() * 10) % 10;
-			location = playToWin(location, b, computerChoice);
-			location = playToBlock(location, b, userChoice);
 			location = checkAvailableCorners(location, b);
 			location = checkCentre(location, b);
+			location = playToBlock(location, b, userChoice);
+			location = playToWin(location, b, computerChoice);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -83,8 +93,8 @@ public class TicTacToe {
 	private void TicTacToeApp(int tossOutcome, char[] board, char userChoice, char computerChoice) {
 		int indexUser, indexComputer;
 		boolean result = false;
+		boolean isFull = false;
 		while (result != true) {
-
 			if (tossOutcome == HEAD) {
 				System.out.println("User plays first");
 				indexUser = getUserMove(board);
@@ -121,6 +131,11 @@ public class TicTacToe {
 					System.out.println("User Wins");
 					break;
 				}
+			}
+			isFull = isBoardFull(board);
+			if (isFull == true) {
+				System.out.println("Its a tie");
+				break;
 			}
 		}
 	}
@@ -206,6 +221,14 @@ public class TicTacToe {
 		if (b[1] != ' ' && b[3] != ' ' && b[7] != ' ' && b[9] != ' ')
 			location = 5;
 		return location;
+	}
+
+	private boolean isBoardFull(char[] b) {
+		boolean flag = false;
+		if (b[1] != ' ' && b[2] != ' ' && b[3] != ' ' && b[4] != ' ' && b[5] != ' ' && b[6] != ' ' && b[7] != ' '
+				&& b[8] != ' ' && b[9] != ' ')
+			flag = true;
+		return flag;
 	}
 
 	public static void main(String[] args) {
