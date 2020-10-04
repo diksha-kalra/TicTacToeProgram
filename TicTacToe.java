@@ -51,6 +51,7 @@ public class TicTacToe {
 		while (true) {
 			location = (int) Math.floor(Math.random() * 10) % 10;
 			location = playToWin(location, b, computerChoice);
+			location = playToBlock(location, b, userChoice);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -150,6 +151,35 @@ public class TicTacToe {
 			location = 7;
 		else if ((b[7] == computerChoice && b[9] == computerChoice || b[2] == computerChoice && b[5] == computerChoice)
 				&& b[8] == ' ')
+			location = 8;
+		else
+			location = location;
+		return location;
+	}
+	
+	private int playToBlock(int location, char b[], char userChoice) {
+		if ((b[1] == userChoice && b[2] == userChoice || b[5] == userChoice && b[7] == userChoice
+				|| b[6] == userChoice && b[9] == userChoice) && b[3] == ' ')
+			location = 3;
+		else if ((b[4] == userChoice && b[5] == userChoice || b[3] == userChoice && b[9] == userChoice) && b[6] == ' ')
+			location = 6;
+		else if ((b[7] == userChoice && b[8] == userChoice || b[3] == userChoice && b[6] == userChoice
+				|| b[1] == userChoice && b[5] == userChoice) && b[9] == ' ')
+			location = 9;
+		else if ((b[2] == userChoice && b[3] == userChoice || b[5] == userChoice && b[9] == userChoice
+				|| b[7] == userChoice && b[4] == userChoice) && b[1] == ' ')
+			location = 1;
+		else if ((b[1] == userChoice && b[3] == userChoice || b[5] == userChoice && b[8] == userChoice) && b[2] == ' ')
+			location = 2;
+		else if ((b[1] == userChoice && b[7] == userChoice || b[5] == userChoice && b[6] == userChoice) && b[4] == ' ')
+			location = 4;
+		else if ((b[1] == userChoice && b[9] == userChoice || b[7] == userChoice && b[3] == userChoice
+				|| b[4] == userChoice && b[6] == userChoice || b[2] == userChoice && b[8] == userChoice) && b[5] == ' ')
+			location = 5;
+		else if ((b[1] == userChoice && b[4] == userChoice || b[8] == userChoice && b[9] == userChoice
+				|| b[5] == userChoice && b[3] == userChoice) && b[7] == ' ')
+			location = 7;
+		else if ((b[7] == userChoice && b[9] == userChoice || b[2] == userChoice && b[5] == userChoice) && b[8] == ' ')
 			location = 8;
 		else
 			location = location;
