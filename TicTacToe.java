@@ -28,8 +28,6 @@ public class TicTacToe {
 		System.out.println("-------------");
 		System.out.println(" " + b[7] + "|" + b[8] + "|" + b[9]);
 	}
-<<<<<<< HEAD
-=======
 
 	private int getUserMove(char[] b) {
 		int location = 0;
@@ -46,7 +44,11 @@ public class TicTacToe {
 		}
 		return location;
 	}
->>>>>>> UC_4_Move_To_Location
+	
+	private char[] moveToLocation(char userChoice, char[] b, int index) {
+		b[index] = userChoice;
+		return b;
+	}
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Progarm");
@@ -63,9 +65,7 @@ public class TicTacToe {
 		System.out.println("Chosen letter for player is :" + userChoice);
 		System.out.println("Chosen letter for computer is :" + computerChoice);
 		board.showBoard(ticTacToeBoard);
-<<<<<<< HEAD
-=======
 		int index = board.getUserMove(ticTacToeBoard);
->>>>>>> UC_4_Move_To_Location
+		ticTacToeBoard=board.moveToLocation(userChoice,ticTacToeBoard,index);
 	}
 }
