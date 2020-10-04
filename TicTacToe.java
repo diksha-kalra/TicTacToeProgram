@@ -52,6 +52,7 @@ public class TicTacToe {
 			location = (int) Math.floor(Math.random() * 10) % 10;
 			location = playToWin(location, b, computerChoice);
 			location = playToBlock(location, b, userChoice);
+			location = checkAvailableCorners(location, b);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -156,7 +157,7 @@ public class TicTacToe {
 			location = location;
 		return location;
 	}
-	
+
 	private int playToBlock(int location, char b[], char userChoice) {
 		if ((b[1] == userChoice && b[2] == userChoice || b[5] == userChoice && b[7] == userChoice
 				|| b[6] == userChoice && b[9] == userChoice) && b[3] == ' ')
@@ -181,6 +182,20 @@ public class TicTacToe {
 			location = 7;
 		else if ((b[7] == userChoice && b[9] == userChoice || b[2] == userChoice && b[5] == userChoice) && b[8] == ' ')
 			location = 8;
+		else
+			location = location;
+		return location;
+	}
+
+	private int checkAvailableCorners(int location, char b[]) {
+		if (b[1] == ' ')
+			location = 1;
+		else if (b[3] == ' ')
+			location = 3;
+		else if (b[7] == ' ')
+			location = 7;
+		else if (b[9] == ' ')
+			location = 9;
 		else
 			location = location;
 		return location;
