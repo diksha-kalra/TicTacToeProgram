@@ -21,6 +21,14 @@ public class TicTacToe {
 		return Character.toUpperCase(userLetter);
 	}
 
+	private void showBoard(char[] b) {
+		System.out.println(" " + b[1] + "|" + b[2] + "|" + b[3]);
+		System.out.println("------------");
+		System.out.println(" " + b[4] + "|" + b[5] + "|" + b[6]);
+		System.out.println("-------------");
+		System.out.println(" " + b[7] + "|" + b[8] + "|" + b[9]);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Progarm");
 		// creating object of class TicTacToe
@@ -35,5 +43,6 @@ public class TicTacToe {
 			computerChoice = 'X';
 		System.out.println("Chosen letter for player is :" + userChoice);
 		System.out.println("Chosen letter for computer is :" + computerChoice);
+		board.showBoard(ticTacToeBoard);
 	}
 }
