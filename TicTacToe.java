@@ -53,6 +53,7 @@ public class TicTacToe {
 			location = playToWin(location, b, computerChoice);
 			location = playToBlock(location, b, userChoice);
 			location = checkAvailableCorners(location, b);
+			location = checkCentre(location, b);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -198,6 +199,12 @@ public class TicTacToe {
 			location = 9;
 		else
 			location = location;
+		return location;
+	}
+
+	private int checkCentre(int location, char b[]) {
+		if (b[1] != ' ' && b[3] != ' ' && b[7] != ' ' && b[9] != ' ')
+			location = 5;
 		return location;
 	}
 
