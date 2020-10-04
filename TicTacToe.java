@@ -33,7 +33,6 @@ public class TicTacToe {
 
 	private int getUserMove(char[] b) {
 		int location = 0;
-		boolean isFull = true;
 		while (true) {
 			System.out.println("User enter the location between 1 to 9");
 			location = sc.nextInt();
@@ -41,6 +40,19 @@ public class TicTacToe {
 				System.out.println("Board Position Occupied enter another location");
 				continue;
 			} else {
+				break;
+			}
+		}
+		return location;
+	}
+
+	private int getComputerMove(char[] b, char computerChoice, char userChoice) {
+		int location = 0;
+		while (true) {
+			location = (int) Math.floor(Math.random() * 10) % 10;
+			if (b[location] != ' ')
+				continue;
+			else {
 				break;
 			}
 		}
@@ -57,6 +69,58 @@ public class TicTacToe {
 		return tossOutcome;
 	}
 
+	private static boolean isWinner(char[] b, char ch) {
+		return ((b[1] == ch && b[2] == ch && b[3] == ch) || (b[4] == ch && b[5] == ch && b[6] == ch)
+				|| (b[7] == ch && b[8] == ch && b[9] == ch) || (b[1] == ch && b[4] == ch && b[7] == ch)
+				|| (b[2] == ch && b[5] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch && b[9] == ch)
+				|| (b[1] == ch && b[5] == ch && b[9] == ch) || (b[3] == ch && b[5] == ch && b[7] == ch));
+	}
+
+	private void TicTacToeApp(int tossOutcome, char[] board, char userChoice, char computerChoice) {
+		int indexUser, indexComputer;
+		boolean result = false;
+		while (result != true) {
+
+			if (tossOutcome == HEAD) {
+				System.out.println("User plays first");
+				indexUser = getUserMove(board);
+				board = moveToLocation(userChoice, board, indexUser);
+				showBoard(board);
+				result = isWinner(board, userChoice);
+				if (result == true) {
+					System.out.println("User Wins");
+					break;
+				}
+				indexComputer = getComputerMove(board, computerChoice, userChoice);
+				board = moveToLocation(computerChoice, board, indexComputer);
+				showBoard(board);
+				result = isWinner(board, computerChoice);
+				if (result == true) {
+					System.out.println("Computer Wins");
+					break;
+				}
+			} else if (tossOutcome == TAIL) {
+				System.out.println("Computer plays first");
+				indexComputer = getComputerMove(board, computerChoice, userChoice);
+				board = moveToLocation(computerChoice, board, indexComputer);
+				showBoard(board);
+				result = isWinner(board, computerChoice);
+				if (result == true) {
+					System.out.println("Computer Wins");
+					break;
+				}
+				indexUser = getUserMove(board);
+				board = moveToLocation(userChoice, board, indexUser);
+				showBoard(board);
+				result = isWinner(board, userChoice);
+				if (result == true) {
+					System.out.println("User Wins");
+					break;
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Progarm");
 		// creating object of class TicTacToe
@@ -71,9 +135,7 @@ public class TicTacToe {
 			computerChoice = 'X';
 		System.out.println("Chosen letter for player is :" + userChoice);
 		System.out.println("Chosen letter for computer is :" + computerChoice);
-		board.showBoard(ticTacToeBoard);
-		int index = board.getUserMove(ticTacToeBoard);
-		ticTacToeBoard = board.moveToLocation(userChoice, ticTacToeBoard, index);
 		int tossOutcome = board.tossToChoosePlayer();
+		board.TicTacToeApp(tossOutcome, ticTacToeBoard, userChoice, computerChoice);
 	}
 }
