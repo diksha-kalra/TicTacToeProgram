@@ -60,10 +60,10 @@ public class TicTacToe {
 				break;
 			}
 			location = (int) Math.floor(Math.random() * 10) % 10;
-			location = checkAvailableCorners(location, b);
-			location = checkCentre(location, b);
 			location = playToBlock(location, b, userChoice);
 			location = playToWin(location, b, computerChoice);
+			location = checkAvailableCorners(location, b);
+			location = checkCentre(location, b);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -80,14 +80,16 @@ public class TicTacToe {
 
 	private int tossToChoosePlayer() {
 		int tossOutcome = (int) Math.floor(Math.random() * 10) % 2;
+
 		return tossOutcome;
 	}
 
-	private static boolean isWinner(char[] b, char ch) {
-		return ((b[1] == ch && b[2] == ch && b[3] == ch) || (b[4] == ch && b[5] == ch && b[6] == ch)
-				|| (b[7] == ch && b[8] == ch && b[9] == ch) || (b[1] == ch && b[4] == ch && b[7] == ch)
-				|| (b[2] == ch && b[5] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch && b[9] == ch)
-				|| (b[1] == ch && b[5] == ch && b[9] == ch) || (b[3] == ch && b[5] == ch && b[7] == ch));
+	private boolean isBoardFull(char[] b) {
+		boolean flag = false;
+		if (b[1] != ' ' && b[2] != ' ' && b[3] != ' ' && b[4] != ' ' && b[5] != ' ' && b[6] != ' ' && b[7] != ' '
+				&& b[8] != ' ' && b[9] != ' ')
+			flag = true;
+		return flag;
 	}
 
 	private void TicTacToeApp(int tossOutcome, char[] board, char userChoice, char computerChoice) {
@@ -95,6 +97,7 @@ public class TicTacToe {
 		boolean result = false;
 		boolean isFull = false;
 		while (result != true) {
+
 			if (tossOutcome == HEAD) {
 				System.out.println("User plays first");
 				indexUser = getUserMove(board);
@@ -223,29 +226,44 @@ public class TicTacToe {
 		return location;
 	}
 
-	private boolean isBoardFull(char[] b) {
-		boolean flag = false;
-		if (b[1] != ' ' && b[2] != ' ' && b[3] != ' ' && b[4] != ' ' && b[5] != ' ' && b[6] != ' ' && b[7] != ' '
-				&& b[8] != ' ' && b[9] != ' ')
-			flag = true;
-		return flag;
+	private static boolean isWinner(char[] b, char ch) {
+		return ((b[1] == ch && b[2] == ch && b[3] == ch) || (b[4] == ch && b[5] == ch && b[6] == ch)
+				|| (b[7] == ch && b[8] == ch && b[9] == ch) || (b[1] == ch && b[4] == ch && b[7] == ch)
+				|| (b[2] == ch && b[5] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch && b[9] == ch)
+				|| (b[1] == ch && b[5] == ch && b[9] == ch) || (b[3] == ch && b[5] == ch && b[7] == ch));
+	}
+
+	private int playAgain() {
+		System.out.println("You want to play again");
+		System.out.println("1 for yes ");
+		System.out.println("2 for no ");
+		int choice = sc.nextInt();
+		return choice;
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Tic Tac Toe Progarm");
-		// creating object of class TicTacToe
-		TicTacToe board = new TicTacToe();
-		char[] ticTacToeBoard = board.createBoard();
-		// calling choose letter method
-		char userChoice = board.chooseLetter();
-		char computerChoice;
-		if (userChoice == 'X')
-			computerChoice = 'O';
-		else
-			computerChoice = 'X';
-		System.out.println("Chosen letter for player is :" + userChoice);
-		System.out.println("Chosen letter for computer is :" + computerChoice);
-		int tossOutcome = board.tossToChoosePlayer();
-		board.TicTacToeApp(tossOutcome, ticTacToeBoard, userChoice, computerChoice);
+		while (true) {
+			System.out.println("Welcome to Tic Tac Toe Progarm");
+			// creating object of class TicTacToe
+			TicTacToe board = new TicTacToe();
+			char[] ticTacToeBoard = board.createBoard();
+			// calling choose letter method
+			char userChoice = board.chooseLetter();
+			char computerChoice;
+			if (userChoice == 'X')
+				computerChoice = 'O';
+			else
+				computerChoice = 'X';
+			System.out.println("Chosen letter for player is :" + userChoice);
+			System.out.println("Chosen letter for computer is :" + computerChoice);
+			int tossOutcome = board.tossToChoosePlayer();
+			board.TicTacToeApp(tossOutcome, ticTacToeBoard, userChoice, computerChoice);
+			int playAgainChoice = board.playAgain();
+			if (playAgainChoice == 1)
+				continue;
+			else
+				break;
+		}
 	}
 }
+
