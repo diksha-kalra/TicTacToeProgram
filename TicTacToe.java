@@ -50,6 +50,7 @@ public class TicTacToe {
 		int location = 0;
 		while (true) {
 			location = (int) Math.floor(Math.random() * 10) % 10;
+			location = playToWin(location, b, computerChoice);
 			if (b[location] != ' ')
 				continue;
 			else {
@@ -119,6 +120,40 @@ public class TicTacToe {
 				}
 			}
 		}
+	}
+
+	private int playToWin(int location, char b[], char computerChoice) {
+		if ((b[1] == computerChoice && b[2] == computerChoice || b[5] == computerChoice && b[7] == computerChoice
+				|| b[6] == computerChoice && b[9] == computerChoice) && b[3] == ' ')
+			location = 3;
+		else if ((b[4] == computerChoice && b[5] == computerChoice || b[3] == computerChoice && b[9] == computerChoice)
+				&& b[6] == ' ')
+			location = 6;
+		else if ((b[7] == computerChoice && b[8] == computerChoice || b[3] == computerChoice && b[6] == computerChoice
+				|| b[1] == computerChoice && b[5] == computerChoice) && b[9] == ' ')
+			location = 9;
+		else if ((b[2] == computerChoice && b[3] == computerChoice || b[5] == computerChoice && b[9] == computerChoice
+				|| b[7] == computerChoice && b[4] == computerChoice) && b[1] == ' ')
+			location = 1;
+		else if ((b[1] == computerChoice && b[3] == computerChoice || b[5] == computerChoice && b[8] == computerChoice)
+				&& b[2] == ' ')
+			location = 2;
+		else if ((b[1] == computerChoice && b[7] == computerChoice || b[5] == computerChoice && b[6] == computerChoice)
+				&& b[4] == ' ')
+			location = 4;
+		else if ((b[1] == computerChoice && b[9] == computerChoice || b[7] == computerChoice && b[3] == computerChoice
+				|| b[4] == computerChoice && b[6] == computerChoice || b[2] == computerChoice && b[8] == computerChoice)
+				&& b[5] == ' ')
+			location = 5;
+		else if ((b[1] == computerChoice && b[4] == computerChoice || b[8] == computerChoice && b[9] == computerChoice
+				|| b[5] == computerChoice && b[3] == computerChoice) && b[7] == ' ')
+			location = 7;
+		else if ((b[7] == computerChoice && b[9] == computerChoice || b[2] == computerChoice && b[5] == computerChoice)
+				&& b[8] == ' ')
+			location = 8;
+		else
+			location = location;
+		return location;
 	}
 
 	public static void main(String[] args) {
