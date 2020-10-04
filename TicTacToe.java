@@ -28,6 +28,25 @@ public class TicTacToe {
 		System.out.println("-------------");
 		System.out.println(" " + b[7] + "|" + b[8] + "|" + b[9]);
 	}
+<<<<<<< HEAD
+=======
+
+	private int getUserMove(char[] b) {
+		int location = 0;
+		boolean isFull = true;
+		while (true) {
+			System.out.println("User enter the location between 1 to 9");
+			location = sc.nextInt();
+			if (b[location] != ' ') {
+				System.out.println("Board Position Occupied enter another location");
+				continue;
+			} else {
+				break;
+			}
+		}
+		return location;
+	}
+>>>>>>> UC_4_Move_To_Location
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tac Toe Progarm");
@@ -44,5 +63,9 @@ public class TicTacToe {
 		System.out.println("Chosen letter for player is :" + userChoice);
 		System.out.println("Chosen letter for computer is :" + computerChoice);
 		board.showBoard(ticTacToeBoard);
+<<<<<<< HEAD
+=======
+		int index = board.getUserMove(ticTacToeBoard);
+>>>>>>> UC_4_Move_To_Location
 	}
 }
