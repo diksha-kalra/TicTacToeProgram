@@ -4,6 +4,8 @@ import java.util.*;
 
 public class TicTacToe {
 	Scanner sc = new Scanner(System.in);
+	public static final int HEAD = 0;
+	public static final int TAIL = 1;
 
 	private char[] createBoard() {
 		// creating char array of size 10
@@ -44,10 +46,15 @@ public class TicTacToe {
 		}
 		return location;
 	}
-	
+
 	private char[] moveToLocation(char userChoice, char[] b, int index) {
 		b[index] = userChoice;
 		return b;
+	}
+
+	private int tossToChoosePlayer() {
+		int tossOutcome = (int) Math.floor(Math.random() * 10) % 2;
+		return tossOutcome;
 	}
 
 	public static void main(String[] args) {
@@ -66,6 +73,7 @@ public class TicTacToe {
 		System.out.println("Chosen letter for computer is :" + computerChoice);
 		board.showBoard(ticTacToeBoard);
 		int index = board.getUserMove(ticTacToeBoard);
-		ticTacToeBoard=board.moveToLocation(userChoice,ticTacToeBoard,index);
+		ticTacToeBoard = board.moveToLocation(userChoice, ticTacToeBoard, index);
+		int tossOutcome = board.tossToChoosePlayer();
 	}
 }
